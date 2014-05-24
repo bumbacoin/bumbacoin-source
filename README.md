@@ -1,3 +1,21 @@
+BUMBACOIN
+
+a new riddim on de litecoin clone tree.
+
+
+1 minute blocks
+halving weekly
+210 million coins.
+
+10k/block
+5hr retarget.
+
+
+we thank all de work that makes bumbacoin possible.
+respect to all de crytpo worldz.
+
+
+================================
 Litecoin integration/staging tree
 ================================
 
