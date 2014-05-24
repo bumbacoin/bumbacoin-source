@@ -93,7 +93,7 @@ void RPCTypeCheck(const Object& o,
 int64 AmountFromValue(const Value& value)
 {
     double dAmount = value.get_real();
-    if (dAmount <= 0.0 || dAmount > 201600000)
+    if (dAmount <= 0.0 || dAmount > 350000000)
         throw JSONRPCError(RPC_TYPE_ERROR, "Invalid amount");
     int64 nAmount = roundint64(dAmount * COIN);
     if (!MoneyRange(nAmount))
@@ -182,10 +182,10 @@ Value stop(const Array& params, bool fHelp)
     if (fHelp || params.size() > 1)
         throw runtime_error(
             "stop\n"
-            "Stop BumbaCoin server.");
+            "Stop Bumbacoin server.");
     // Shutdown will take long enough that the response should get back
     StartShutdown();
-    return "BumbaCoin server stopping";
+    return "Bumbacoin server stopping";
 }
 
 
@@ -260,6 +260,7 @@ static const CRPCCommand vRPCCommands[] =
     { "decoderawtransaction",   &decoderawtransaction,   false,     false,      false },
     { "signrawtransaction",     &signrawtransaction,     false,     false,      false },
     { "sendrawtransaction",     &sendrawtransaction,     false,     false,      false },
+    { "getnormalizedtxid",      &getnormalizedtxid,      true,      true,       false },
     { "gettxoutsetinfo",        &gettxoutsetinfo,        true,      false,      false },
     { "gettxout",               &gettxout,               true,      false,      false },
     { "lockunspent",            &lockunspent,            false,     false,      true },
@@ -751,7 +752,7 @@ void StartRPCThreads()
               "The username and password MUST NOT be the same.\n"
               "If the file does not exist, create it with owner-readable-only file permissions.\n"
               "It is also recommended to set alertnotify so you are notified of problems;\n"
-              "for example: alertnotify=echo %%s | mail -s \"bumbacoin Alert\" admin@foo.com\n"),
+              "for example: alertnotify=echo %%s | mail -s \"Bumbacoin Alert\" admin@foo.com\n"),
                 strWhatAmI.c_str(),
                 GetConfigFile().string().c_str(),
                 EncodeBase58(&rand_pwd[0],&rand_pwd[0]+32).c_str()),
@@ -852,7 +853,8 @@ void StopRPCThreads()
     if (rpc_io_service == NULL) return;
 
     rpc_io_service->stop();
-    rpc_worker_group->join_all();
+    if (rpc_worker_group != NULL)
+        rpc_worker_group->join_all();
     delete rpc_worker_group; rpc_worker_group = NULL;
     delete rpc_ssl_context; rpc_ssl_context = NULL;
     delete rpc_io_service; rpc_io_service = NULL;
@@ -963,8 +965,8 @@ void ServiceConnection(AcceptedConnection *conn)
         {
             printf("ThreadRPCServer incorrect password attempt from %s\n", conn->peer_address_to_string().c_str());
             /* Deter brute-forcing short passwords.
-               If this results in a DOS the user really
-               shouldn't have their RPC port exposed.*/
+               If this results in a DoS the user really
+               shouldn't have their RPC port exposed. */
             if (mapArgs["-rpcpassword"].size() < 20)
                 MilliSleep(250);
 
@@ -1187,6 +1189,7 @@ Array RPCConvertValues(const std::string &strMethod, const std::vector<std::stri
     if (strMethod == "createrawtransaction"   && n > 1) ConvertTo<Object>(params[1]);
     if (strMethod == "signrawtransaction"     && n > 1) ConvertTo<Array>(params[1], true);
     if (strMethod == "signrawtransaction"     && n > 2) ConvertTo<Array>(params[2], true);
+    if (strMethod == "sendrawtransaction"     && n > 1) ConvertTo<bool>(params[1], true);
     if (strMethod == "gettxout"               && n > 1) ConvertTo<boost::int64_t>(params[1]);
     if (strMethod == "gettxout"               && n > 2) ConvertTo<bool>(params[2]);
     if (strMethod == "lockunspent"            && n > 0) ConvertTo<bool>(params[0]);
