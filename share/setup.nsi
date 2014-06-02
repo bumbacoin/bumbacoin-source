@@ -5,7 +5,7 @@ SetCompressor /SOLID lzma
 
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 0.1.2.0
+!define VERSION 1.2.1.0
 !define COMPANY "Bumbacoin"
 !define URL http://www.bumbacoin.com/
 
