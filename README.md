@@ -4,12 +4,15 @@ a new riddim on de litecoin clone tree.
 
 
 1 minute blocks
-halving weekly
-210 million coins.
-
-10k/block
 5hr retarget.
 
+due to de POW being too fast halving ahahaha
+payout has been upgraded to 2500 til de 6mnth mark,
+then 1250 til de 2 year mark.
+then 50 for evs.
+
+max coins now 450 billion coins.
+but we expect de bumba to be converted to PoS long before dem bumba be generated ... long time afore ...
 
 we thank all de work that makes bumbacoin possible.
 respect to all de crytpo worldz.
