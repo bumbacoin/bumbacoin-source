@@ -1,3 +1,8 @@
+================================
+NOTE SOON TO BE DEPRECATED - UPDATED SOURCE/CHAIN
+================================
+
+
 BUMBACOIN
 
 a new riddim on de litecoin clone tree.
