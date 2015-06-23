@@ -1,5 +1,5 @@
 ================================
-NOTE SOON TO BE DEPRECATED - UPDATED SOURCE/CHAIN
+OLD PRE SWAP CHAIN. no longer used
 ================================
 
 
